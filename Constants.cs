@@ -11,7 +11,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
         // ----------------------------------------------------------------------------------------- 
 
         // GAME
-        public static string GAME_NAME = "Batter";
+        public static string GAME_NAME = "MARIO?";
         public static int FRAME_RATE = 60;
 
         // SCREEN
