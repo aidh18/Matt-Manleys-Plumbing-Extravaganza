@@ -1,46 +1,70 @@
-using System;
-using Matt_Manleys_Plumbing_Extravaganza.Game.Casting;
-// using Matt_Manleys_Plumbing_Extravaganza.Game.Scripting;
+using System.Collections.Generic;
+using Matt_Manleys_Plumbing_Extravaganza.Game.Scripting;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Services;
 
 namespace Matt_Manleys_Plumbing_Extravaganza.Game.Directing
 {
-
-    public class Director
+    /// <summary>
+    /// Controls the sequence and pacing of the game.
+    /// </summary>
+    public class Director : IActionCallback
     {
+        private IAudioService _audioService = null;
+        private IVideoService _videoService = null;
+        private ISettingsService _settingsService = null;
 
-        private VideoService videoService;
-
-        public Director(VideoService videoService)
+        public Director(IServiceFactory serviceFactory)
         {
-            this.videoService = videoService;
+            _audioService = serviceFactory.GetAudioService();
+            _videoService = serviceFactory.GetVideoService();
+            _settingsService = serviceFactory.GetSettingsService();
         }
 
-
-        public void StartGame()
+        public void OnError(string message, System.Exception exception)
         {
-            while (videoService.IsWindowOpen())
+            _audioService.Release();
+            _videoService.Release();
+            _settingsService.Save();
+            System.Console.Error.WriteLine($"ERROR: {message}");
+            System.Console.Error.WriteLine(exception.Message);
+            System.Console.Error.WriteLine(exception.StackTrace);
+        }
+
+        public void OnInfo(string message)
+        {
+            System.Console.Out.WriteLine($"INFO: {message}");
+        }
+
+        public void OnStop()
+        {   _audioService.Release();
+            _videoService.Release();
+            System.Console.Out.WriteLine($"STOP");
+        }
+
+        public void Direct(Scene scene)
+        {
+            _audioService.Initialize();
+            _videoService.Initialize();
+            while (_videoService.IsWindowOpen())
             {
-                GetInputs();
-                DoUpdates();
-                DoOutputs();
+                DoActions(Phase.Input, scene);
+                DoActions(Phase.Update, scene);
+                DoActions(Phase.Output, scene);
+                scene.ApplyChanges();
             }
+            _audioService.Release();
+            _videoService.Release();
+            _settingsService.Save();
         }
 
-        private void GetInputs()
+        private void DoActions(int phase, Scene scene)
         {
-
-        }
-
-        private void DoUpdates()
-        {
-            
-        }
-
-
-        private void DoOutputs()
-        {
-
+            float deltaTime = _videoService.GetDeltaTime();
+            List<Action> actions = scene.GetAllActions(phase);
+            foreach(Action action in actions)
+            {
+                action.Execute(scene, deltaTime, this);
+            }
         }
     }
 }

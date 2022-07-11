@@ -8,10 +8,14 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
     /// 
     /// </summary>
     public class Player : Actor
-    {
-        public Player(bool debug = false) : base(debug)
+    {   
+        float x = 20.0f;
+        float y = 20.0f;
+
+        public Player()
         {
             
         }
+
     }
 }

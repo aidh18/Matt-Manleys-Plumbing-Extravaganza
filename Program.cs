@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Directing;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Services;
+using Matt_Manleys_Plumbing_Extravaganza.Game.Scripting;
 
 namespace Matt_Manleys_Plumbing_Extravaganza
 {
@@ -9,11 +10,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza
         
         static void Main(string[] args)
         {
-            VideoService videoService = new RaylibVideoService(Constants.GAME_NAME,
-            Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Constants.BLACK);
+            IServiceFactory serviceFactory = new RaylibServiceFactory();
+            Scene scene = new Scene();
 
-            Director director = new Director(videoService);
-            director.StartGame();
+            Director director = new Director(serviceFactory);
+            director.Direct(scene);
         }
     }
 }
