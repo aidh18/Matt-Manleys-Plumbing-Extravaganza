@@ -21,20 +21,20 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             
             Actor player = new Actor();
             player.SizeTo(50, 50);
-            player.MoveTo(100, 400); // world coordinates
+            player.MoveTo(100, 900); // world coordinates
             player.Tint(Color.Red());
 
             Actor screen = new Actor();
             screen.SizeTo(1100, 800);
-            screen.MoveTo(0, -200); // 
+            screen.MoveTo(0, 0); // screen (or raylib window) coordinates 
 
             Actor world = new Actor();
             world.SizeTo(4000, 1000);
             world.MoveTo(0, 0);
 
             Actor platform = new Actor();
-            world.SizeTo(100,50);
-            world.MoveTo(0,0);
+            platform.SizeTo(100,50);
+            platform.MoveTo(500, 500); // world coordinates
             platform.Tint(Color.Blue());
 
             Camera camera = new Camera(player, screen, world);
@@ -50,6 +50,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             scene.AddActor("labels", label);
             scene.AddActor("screen", screen);
             scene.AddActor("camera", camera);
+            scene.AddActor("platforms", platform);
 
             scene.AddAction(Phase.Input, steerActorAction);
             scene.AddAction(Phase.Update, moveActorAction);
