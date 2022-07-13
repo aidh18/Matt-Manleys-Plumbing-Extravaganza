@@ -37,6 +37,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             platform.MoveTo(500, 500); // world coordinates
             platform.Tint(Color.Blue());
 
+            Actor platform2 = new Actor();
+            platform2.SizeTo(4000,50);
+            platform2.MoveTo(0, 950); // world coordinates
+            platform2.Tint(Color.Blue());
+
             Camera camera = new Camera(player, screen, world);
 
             // Instantiate the actions that use the actors.
@@ -51,6 +56,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             scene.AddActor("screen", screen);
             scene.AddActor("camera", camera);
             scene.AddActor("platforms", platform);
+            scene.AddActor("platforms", platform2);
 
             scene.AddAction(Phase.Input, steerActorAction);
             scene.AddAction(Phase.Update, moveActorAction);

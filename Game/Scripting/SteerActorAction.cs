@@ -49,9 +49,9 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 }
 
                 // JUMP
-                if (_keyboardService.IsKeyDown(KeyboardKey.Space))
+                if (_keyboardService.IsKeyPressed(KeyboardKey.Space))
                 {
-                    directionY = -20;
+                    directionY = -50;
                 }
 
                 // steer the actor in the desired direction

@@ -64,6 +64,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Directing
             foreach(Action action in actions)
             {
                 action.Execute(scene, deltaTime, this);
+                CollideActorsAction.Execute(scene, deltaTime, this);
             }
         }
     }

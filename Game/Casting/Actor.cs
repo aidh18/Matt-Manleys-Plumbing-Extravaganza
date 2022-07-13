@@ -67,6 +67,24 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
             }
         }
 
+        // public void isGrounded()
+        // {
+        //     {
+        //         float y = GetBottom();
+
+        //         float maxX = region.GetRight() - GetWidth();
+        //         float maxY = region.GetBottom() - GetHeight();
+        //         float minX = region.GetLeft();
+        //         float minY = region.GetTop();
+
+        //         x = Math.Clamp(x, minX, maxX);
+        //         y = Math.Clamp(y, minY, maxY);
+
+        //         Vector2 newPosition = new Vector2(x, y);
+        //         MoveTo(newPosition);
+        //     }
+        // }
+
         public virtual void Enable()
         {
             _enabled = true;
