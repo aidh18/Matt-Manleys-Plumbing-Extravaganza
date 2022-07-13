@@ -48,6 +48,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             SteerActorAction steerActorAction = new SteerActorAction(serviceFactory);
             MoveActorAction moveActorAction = new MoveActorAction(serviceFactory);
             DrawActorAction drawActorAction = new DrawActorAction(serviceFactory);
+            CollideActorsAction collideActorsAction = new CollideActorsAction(serviceFactory);
 
             // Instantiate a new scene, add the actors and actions.
             Scene scene = new Scene();
@@ -60,6 +61,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
 
             scene.AddAction(Phase.Input, steerActorAction);
             scene.AddAction(Phase.Update, moveActorAction);
+            scene.AddAction(Phase.Update, collideActorsAction);
             scene.AddAction(Phase.Output, drawActorAction);
 
             Director director = new Director(serviceFactory);

@@ -23,20 +23,22 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
             try
             {
                 // get the actors from the cast
-                Actor player = scene.GetFirstActor("player");
-                Actor platform = scene.GetFirstActor("platform");
+                Actor player = scene.GetFirstActor("actors");
+                Actor platform = scene.GetFirstActor("platforms");
                 
                 // detect a collision between the actors.
-                if (platform.Overlaps(player))
+                if (player.Overlaps(platform))
                 {
                     // resolve by changing the actor's color to something else
-                    platform.Tint(Color.Green());
-                    
+                    player.Tint(Color.Green());
+                    float x = player.GetLeft();
+                    float y = platform.GetTop() - player.GetHeight();
+                    player.MoveTo(x, y);
                 }
                 else
                 {
                     // otherwise, just make it the original color
-                    platform.Tint(Color.Red());
+                    player.Tint(Color.Red());
                 }
             }
             catch (Exception exception)
