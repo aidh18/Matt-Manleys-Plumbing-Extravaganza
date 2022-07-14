@@ -24,13 +24,21 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
             try
             {
                 // get the actors from the scene
-                Actor actor = scene.GetFirstActor("actors");
+                Hero hero = (Hero) scene.GetFirstActor("actors");
                 Camera camera = (Camera) scene.GetFirstActor("camera");
                 Actor world = camera.GetWorld();
 
                 // move the actor and restrict it to the screen boundaries
-                actor.Move(5); // use a constant pull of 5 in the downward direction, I.E. gravity
-                actor.ClampTo(world); // keep actor inside world.
+                if (hero.isJumping())
+                {
+                    hero.Move();
+                }
+                else
+                {
+                    hero.Move(5);
+                }
+                // keep actor inside world.
+                hero.ClampTo(world);
             }
             catch (Exception exception)
             {

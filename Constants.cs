@@ -15,8 +15,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza
         public static int FRAME_RATE = 60;
 
         // SCREEN
-        public static int SCREEN_WIDTH = 1040;
-        public static int SCREEN_HEIGHT = 680;
+        public static int SCREEN_WIDTH = 480;
+        public static int SCREEN_HEIGHT = 480;
         public static int CENTER_X = SCREEN_WIDTH / 2;
         public static int CENTER_Y = SCREEN_HEIGHT / 2;
 

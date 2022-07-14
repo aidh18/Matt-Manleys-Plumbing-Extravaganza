@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Casting;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Directing;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Scripting;
@@ -8,68 +9,58 @@ namespace Matt_Manleys_Plumbing_Extravaganza
 {
     internal class Program
     {
-        static readonly string platformsFile = @"Matt_Manleys_Plumbing_Extravaganza.Assets.LevelData.platforms.txt";
+        static readonly string platformsFile = @"Assets\LevelData\platforms.txt";
         
         static void Main(string[] args)
         {
-            
+            Scene scene = new Scene();
+
             // Instantiate a service factory for other objects to use.
             IServiceFactory serviceFactory = new RaylibServiceFactory();
             
             // Instantiate the actors that are used
             Label label = new Label();
-            label.Display("'w', 's', 'a', 'd' to move");
+            label.Display("I am the greatest person in the world.");
             label.MoveTo(25, 25);
             
-            Actor player = new Actor();
-            player.SizeTo(50, 50);
-            player.MoveTo(200, 900); // world coordinates
-            player.Tint(Color.Red());
+            Hero hero = new Hero();
+            hero.SizeTo(32, 32);
+            hero.MoveTo(32, 96); // world coordinates
+            hero.Tint(Color.Red());
 
             Actor screen = new Actor();
-            screen.SizeTo(1100, 800);
+            screen.SizeTo(480, 480);
             screen.MoveTo(0, 0); // screen (or raylib window) coordinates 
 
             Actor world = new Actor();
-            world.SizeTo(4000, 1000);
+            world.SizeTo(6753, 480);
             world.MoveTo(0, 0);
 
             // Draw the locations of the platforms from the text file and instantiate them
             string[] lines = File.ReadAllLines(platformsFile);  
             foreach(string line in lines)
             {
-                foreach (string platform in platforms)
-                {
-                    String[] platformInfo = platform.Split(", ", 4, StringSplitOptions.RemoveEmptyEntries);
-                    platform.Tint(Color.Blue());
-                }
+                String[] platformsData = line.Split(", ", 4, StringSplitOptions.RemoveEmptyEntries);
+                Actor platform = new Actor();
+                platform.SizeTo(float.Parse(platformsData[0]), float.Parse(platformsData[1]));
+                platform.MoveTo(float.Parse(platformsData[2]), float.Parse(platformsData[3])); // world coordinates
+                scene.AddActor("platforms", platform);
             }
-            // Actor platform = new Actor();
-            // platform.SizeTo(100, 50);
-            // platform.MoveTo(500, 500); // world coordinates
-            // platform.Tint(Color.Blue());
 
-            // Actor platform2 = new Actor();
-            // platform2.SizeTo(4000, 50);
-            // platform2.MoveTo(0, 950); // world coordinates
-            // platform2.Tint(Color.Blue());
-
-            Camera camera = new Camera(player, screen, world);
+            Camera camera = new Camera(hero, screen, world);
 
             // Instantiate the actions that use the actors.
             SteerActorAction steerActorAction = new SteerActorAction(serviceFactory);
             MoveActorAction moveActorAction = new MoveActorAction(serviceFactory);
             DrawActorAction drawActorAction = new DrawActorAction(serviceFactory);
             CollideActorsAction collideActorsAction = new CollideActorsAction(serviceFactory);
+            // DrawImagsesAction drawImagesAction = new DrawImagesAction(serviceFactory);
 
             // Instantiate a new scene, add the actors and actions.
-            Scene scene = new Scene();
-            scene.AddActor("actors", player);
+            scene.AddActor("actors", hero);
             scene.AddActor("labels", label);
             scene.AddActor("screen", screen);
             scene.AddActor("camera", camera);
-            // scene.AddActor("platforms", platform);
-            // scene.AddActor("platforms", platform2);
 
             scene.AddAction(Phase.Input, steerActorAction);
             scene.AddAction(Phase.Update, moveActorAction);

@@ -24,9 +24,10 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
         {
             try
             {
+                Hero hero = (Hero) scene.GetFirstActor("actors");
                 // declare direction variables
-                int directionX = 0;
-                int directionY = 0;
+                float directionX = hero.GetVelocity().X;
+                float directionY = hero.GetVelocity().Y;
 
                 // determine vertical or y-axis direction
                 if (_keyboardService.IsKeyDown(KeyboardKey.W))
@@ -47,16 +48,32 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 {
                     directionX = 5;
                 }
-
-                // JUMP
-                if (_keyboardService.IsKeyPressed(KeyboardKey.Space))
+                else
                 {
-                    directionY = -200;
+                    directionX = 0;
+                }
+                
+                // JUMP
+                if (hero.isJumping() == false)
+                {
+                    if (_keyboardService.IsKeyPressed(KeyboardKey.Space))
+                    {
+                        directionY = -20;
+                        hero.StartJump();
+                    }
+                }
+
+                if (hero.isJumping() == true)
+                {
+                    directionY += 1;
+                    if (directionY == 5)
+                    {
+                        hero.StopJump();
+                    }
                 }
 
                 // steer the actor in the desired direction
-                Actor actor = scene.GetFirstActor("actors");
-                actor.Steer(directionX, directionY);
+                hero.Steer(directionX, directionY);
             }
             catch (Exception exception)
             {
