@@ -29,7 +29,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 Actor world = camera.GetWorld();
 
                 // move the actor and restrict it to the screen boundaries
-                actor.Move(5); // use a constant pull of 5 in the downward direction, I.E. gravity
+                actor.Move(9.8f); // use a constant pull of 5 in the downward direction, I.E. gravity
                 actor.ClampTo(world); // keep actor inside world.
             }
             catch (Exception exception)
