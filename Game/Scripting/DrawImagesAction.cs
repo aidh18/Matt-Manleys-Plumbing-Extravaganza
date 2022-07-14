@@ -5,16 +5,16 @@ using Matt_Manleys_Plumbing_Extravaganza.Game.Scripting;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Services;
 
 
-namespace Example.Images
+namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
 {
     /// <summary>
     /// Draws the actors on the screen.
     /// </summary>
-    public class DrawImageAction : Matt_Manleys_Plumbing_Extravaganza.Game.Scripting.Action
+    public class DrawImagesAction : Matt_Manleys_Plumbing_Extravaganza.Game.Scripting.Action
     {
         private IVideoService _videoService;
 
-        public DrawImageAction(IServiceFactory serviceFactory)
+        public DrawImagesAction(IServiceFactory serviceFactory)
         {
             _videoService = serviceFactory.GetVideoService();
         }

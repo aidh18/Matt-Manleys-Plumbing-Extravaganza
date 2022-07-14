@@ -33,18 +33,28 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             screen.MoveTo(0, 0); // screen (or raylib window) coordinates 
 
             Actor world = new Actor();
-            world.SizeTo(6753, 480);
+            world.SizeTo(6752, 480);
             world.MoveTo(0, 0);
 
             // Draw the locations of the platforms from the text file and instantiate them
             string[] lines = File.ReadAllLines(platformsFile);  
             foreach(string line in lines)
             {
-                String[] platformsData = line.Split(", ", 4, StringSplitOptions.RemoveEmptyEntries);
+                String[] platformsData = line.Split(", ", 5, StringSplitOptions.RemoveEmptyEntries);
                 Actor platform = new Actor();
                 platform.SizeTo(float.Parse(platformsData[0]), float.Parse(platformsData[1]));
                 platform.MoveTo(float.Parse(platformsData[2]), float.Parse(platformsData[3])); // world coordinates
                 scene.AddActor("platforms", platform);
+                if (platformsData[4] == "Floor")
+                {
+                    // Do nothing for now
+                    // Eventually, we will assign the image of the floor to this
+                }
+                else if (platformsData[4] == "Brick")
+                {
+                    // Do nothing for now
+                    // Eventually, we will assign the image of a brick to this
+                }
             }
 
             Camera camera = new Camera(hero, screen, world);
@@ -54,7 +64,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             MoveActorAction moveActorAction = new MoveActorAction(serviceFactory);
             DrawActorAction drawActorAction = new DrawActorAction(serviceFactory);
             CollideActorsAction collideActorsAction = new CollideActorsAction(serviceFactory);
-            // DrawImagsesAction drawImagesAction = new DrawImagesAction(serviceFactory);
+            DrawImagesAction drawImagesAction = new DrawImagesAction(serviceFactory);
 
             // Instantiate a new scene, add the actors and actions.
             scene.AddActor("actors", hero);
