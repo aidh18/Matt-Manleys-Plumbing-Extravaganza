@@ -29,7 +29,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 Actor world = camera.GetWorld();
 
                 // move the actor and restrict it to the screen boundaries
-<<<<<<< HEAD
                 if (hero.isJumping())
                 {
                     hero.Move();
@@ -40,10 +39,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 }
                 // keep actor inside world.
                 hero.ClampTo(world);
-=======
-                actor.Move(9.8f); // use a constant pull of 5 in the downward direction, I.E. gravity
-                actor.ClampTo(world); // keep actor inside world.
->>>>>>> 04908053c0b57145acb249ba0493438032e74de9
             }
             catch (Exception exception)
             {
