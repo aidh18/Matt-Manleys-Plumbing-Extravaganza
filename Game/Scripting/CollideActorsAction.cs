@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Casting;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Scripting;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Services;
@@ -24,21 +25,24 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
             {
                 // get the actors from the cast
                 Actor player = scene.GetFirstActor("actors");
-                Actor platform = scene.GetFirstActor("platforms");
+                List<Actor> platforms = scene.GetAllActors("platforms");
                 
-                // detect a collision between the actors.
-                if (player.Overlaps(platform))
+                // detect a collision between the platforms and the player.
+                foreach (Actor platform in platforms)
                 {
-                    // resolve by changing the actor's color to something else
-                    player.Tint(Color.Green());
-                    float x = player.GetLeft();
-                    float y = platform.GetTop() - player.GetHeight();
-                    player.MoveTo(x, y);
-                }
-                else
-                {
-                    // otherwise, just make it the original color
-                    player.Tint(Color.Red());
+                    if (player.Overlaps(platform))
+                    {
+                        // resolve by changing the actor's color to something else
+                        player.Tint(Color.Green());
+                        float x = player.GetLeft();
+                        float y = platform.GetTop() - player.GetHeight();
+                        player.MoveTo(x, y);
+                    }
+                    else
+                    {
+                        // otherwise, just make it the original color
+                        player.Tint(Color.Red());
+                    }
                 }
             }
             catch (Exception exception)

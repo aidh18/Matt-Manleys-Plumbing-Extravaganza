@@ -8,20 +8,22 @@ namespace Matt_Manleys_Plumbing_Extravaganza
 {
     internal class Program
     {
+        static readonly string platformsFile = @"Matt_Manleys_Plumbing_Extravaganza.Assets.LevelData.platforms.txt";
         
         static void Main(string[] args)
         {
+            
             // Instantiate a service factory for other objects to use.
             IServiceFactory serviceFactory = new RaylibServiceFactory();
             
-            // Instantiate the actors that are used in this example.
+            // Instantiate the actors that are used
             Label label = new Label();
             label.Display("'w', 's', 'a', 'd' to move");
             label.MoveTo(25, 25);
             
             Actor player = new Actor();
             player.SizeTo(50, 50);
-            player.MoveTo(100, 900); // world coordinates
+            player.MoveTo(200, 900); // world coordinates
             player.Tint(Color.Red());
 
             Actor screen = new Actor();
@@ -32,15 +34,25 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             world.SizeTo(4000, 1000);
             world.MoveTo(0, 0);
 
-            Actor platform = new Actor();
-            platform.SizeTo(100,50);
-            platform.MoveTo(500, 500); // world coordinates
-            platform.Tint(Color.Blue());
+            // Draw the locations of the platforms from the text file and instantiate them
+            string[] lines = File.ReadAllLines(platformsFile);  
+            foreach(string line in lines)
+            {
+                foreach (string platform in platforms)
+                {
+                    String[] platformInfo = platform.Split(", ", 4, StringSplitOptions.RemoveEmptyEntries);
+                    platform.Tint(Color.Blue());
+                }
+            }
+            // Actor platform = new Actor();
+            // platform.SizeTo(100, 50);
+            // platform.MoveTo(500, 500); // world coordinates
+            // platform.Tint(Color.Blue());
 
-            Actor platform2 = new Actor();
-            platform2.SizeTo(4000,50);
-            platform2.MoveTo(0, 950); // world coordinates
-            platform2.Tint(Color.Blue());
+            // Actor platform2 = new Actor();
+            // platform2.SizeTo(4000, 50);
+            // platform2.MoveTo(0, 950); // world coordinates
+            // platform2.Tint(Color.Blue());
 
             Camera camera = new Camera(player, screen, world);
 
@@ -56,8 +68,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             scene.AddActor("labels", label);
             scene.AddActor("screen", screen);
             scene.AddActor("camera", camera);
-            scene.AddActor("platforms", platform);
-            scene.AddActor("platforms", platform2);
+            // scene.AddActor("platforms", platform);
+            // scene.AddActor("platforms", platform2);
 
             scene.AddAction(Phase.Input, steerActorAction);
             scene.AddAction(Phase.Update, moveActorAction);
