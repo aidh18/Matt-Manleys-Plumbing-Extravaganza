@@ -120,8 +120,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
         {
             string json = @"{ 
                 ""frameRate"": 60, 
-                ""screenCaption"": ""CSE210"",
-                ""screenWidth"": 640, 
+                ""screenCaption"": ""Matt Manleys Plumbing Extravaganza"",
+                ""screenWidth"": 480, 
                 ""screenHeight"": 480 }";
             _settings = JsonNode.Parse(json);
         }

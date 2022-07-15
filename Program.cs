@@ -22,6 +22,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             Label label = new Label();
             label.Display("I am the greatest person in the world.");
             label.MoveTo(25, 25);
+
+            // Sound themeSong = new Sound(@"Assets\Sounds\SuperMarioBrosTheme.mp3");
             
             Hero hero = new Hero();
             hero.SizeTo(32, 32);
@@ -76,6 +78,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             DrawActorAction drawActorAction = new DrawActorAction(serviceFactory);
             CollideActorsAction collideActorsAction = new CollideActorsAction(serviceFactory);
             DrawImagesAction drawImagesAction = new DrawImagesAction(serviceFactory);
+            // PlayMusicAction playMusicAction = new PlayMusicAction(serviceFactory);
 
             // Instantiate a new scene, add the actors and actions.
             scene.AddActor("actors", hero);
@@ -89,6 +92,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             scene.AddAction(Phase.Update, collideActorsAction);
             scene.AddAction(Phase.Output, drawActorAction);
             scene.AddAction(Phase.Output, drawImagesAction);
+            // scene.AddAction(Phase.Output, playMusicAction);
 
             Director director = new Director(serviceFactory);
             director.Direct(scene);
