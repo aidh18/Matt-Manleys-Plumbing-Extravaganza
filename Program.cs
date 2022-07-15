@@ -36,6 +36,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             world.SizeTo(6752, 480);
             world.MoveTo(0, 0);
 
+            // Image background = new Image();
+            // background.SizeTo(6752, 480);
+            // background.MoveTo(0, 0);
+            // background.Display(@"Assets\Images\Background.png");
+
             // Draw the locations of the platforms from the text file and instantiate them
             string[] lines = File.ReadAllLines(platformsFile);  
             foreach(string line in lines)
@@ -44,17 +49,18 @@ namespace Matt_Manleys_Plumbing_Extravaganza
                 Actor platform = new Actor();
                 platform.SizeTo(float.Parse(platformsData[0]), float.Parse(platformsData[1]));
                 platform.MoveTo(float.Parse(platformsData[2]), float.Parse(platformsData[3])); // world coordinates
+                platform.Tint(Color.Transparent());
                 scene.AddActor("platforms", platform);
-                if (platformsData[4] == "Floor")
-                {
-                    // Do nothing for now
-                    // Eventually, we will assign the image of the floor to this
-                }
-                else if (platformsData[4] == "Brick")
-                {
-                    // Do nothing for now
-                    // Eventually, we will assign the image of a brick to this
-                }
+                // if (platformsData[4] == "Floor")
+                // {
+                //     // Do nothing for now
+                //     // Eventually, we will assign the image of the floor to this
+                // }
+                // else if (platformsData[4] == "Brick")
+                // {
+                //     // Do nothing for now
+                //     // Eventually, we will assign the image of a brick to this
+                // }
             }
 
             Camera camera = new Camera(hero, screen, world);

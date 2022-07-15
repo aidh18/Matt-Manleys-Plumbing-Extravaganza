@@ -33,7 +33,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
             }
             catch (Exception exception)
             {
-                callback.OnError("Couldn't draw robots.", exception);
+                callback.OnError("Couldn't draw actors.", exception);
             }
         }
     }
