@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Casting;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Scripting;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Services;
@@ -26,6 +27,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 // get the actors from the scene
                 Hero hero = (Hero) scene.GetFirstActor("actors");
                 Camera camera = (Camera) scene.GetFirstActor("camera");
+                List<Image> enemies = scene.GetAllActors<Image>("enemies");
                 Actor world = camera.GetWorld();
 
                 // move the actor and restrict it to the screen boundaries
@@ -39,6 +41,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 }
                 // keep actor inside world.
                 hero.ClampTo(world);
+
+                foreach (Image enemy in enemies)
+                {
+                    enemy.Move();
+                }
             }
             catch (Exception exception)
             {

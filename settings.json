@@ -2,5 +2,6 @@
   "frameRate": 60,
   "screenCaption": "Matt_Manleys_Plumbing_Extravaganza",
   "screenWidth": 480,
-  "screenHeight": 480
+  "screenHeight": 480,
+  "backgroundMusic": "Assets/Sounds/SuperMarioBrosTheme.mp3"
 }

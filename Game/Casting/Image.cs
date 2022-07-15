@@ -34,6 +34,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         public void Display(string file)
         {
             _files = new string[] { file };
+            _repeated = false;
+            _index = 0;
         }
 
         public string GetFile()
@@ -51,6 +53,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
                     _index = Math.Min(_index + 1, _files.Length - 1);
                 }
             }
+            Console.WriteLine($"index: {_index}, file length: {_files.Length}");
             return _files[_index].Trim();
         }
 

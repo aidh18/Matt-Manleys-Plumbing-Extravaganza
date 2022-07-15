@@ -29,37 +29,39 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 float directionX = hero.GetVelocity().X;
                 float directionY = hero.GetVelocity().Y;
 
-                // determine vertical or y-axis direction
-                if (_keyboardService.IsKeyDown(KeyboardKey.W))
-                {
-                    directionY = -5;
-                }
-                else if (_keyboardService.IsKeyDown(KeyboardKey.S))
-                {
-                    directionY = 5;
-                }
-
                 // determine horizontal or x-axis direction
                 if (_keyboardService.IsKeyDown(KeyboardKey.A))
                 {
                     directionX = -5;
+                    hero.ShowWalkLeft();
                 }
                 else if (_keyboardService.IsKeyDown(KeyboardKey.D))
                 {
                     directionX = 5;
+                    hero.ShowWalkRight();
                 }
                 else
                 {
                     directionX = 0;
+                    hero.ShowIdle();
                 }
                 
                 // JUMP
                 if (hero.isJumping() == false)
                 {
-                    if (_keyboardService.IsKeyPressed(KeyboardKey.Space))
+                    if (_keyboardService.IsKeyPressed(KeyboardKey.W))
                     {
                         directionY = -20;
                         hero.StartJump();
+                        if (directionX >= 0)
+                        {
+                            hero.ShowJumpRight();
+                        }
+                        else
+                        {
+                            hero.ShowJumpLeft();
+                        }
+                        
                     }
                 }
 

@@ -26,22 +26,36 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 // get the actors from the cast
                 Actor player = scene.GetFirstActor("actors");
                 List<Actor> platforms = scene.GetAllActors("platforms");
+                List<Image> enemies = scene.GetAllActors<Image>("enemies");
                 
                 // detect a collision between the platforms and the player.
                 foreach (Actor platform in platforms)
                 {
                     if (player.Overlaps(platform))
                     {
-                        // resolve by changing the actor's color to something else
-                        player.Tint(Color.Green());
+                        // resolve by moving the actor to the top
                         float x = player.GetLeft();
                         float y = platform.GetTop() - player.GetHeight();
                         player.MoveTo(x, y);
                     }
-                    else
+                }
+                foreach (Image enemy in enemies)
+                {
+                    foreach (Actor platform in platforms)
                     {
-                        // otherwise, just make it the original color
-                        player.Tint(Color.Red());
+                        if (enemy.Overlaps(platform))
+                        {
+                            float vx = enemy.GetVelocity().X * -1;
+                            enemy.Steer(vx, 0);
+                        }
+                    }
+                }
+                foreach (Image enemy in enemies)
+                {
+                    if (enemy.Overlaps(player))
+                    {
+                        float vx = enemy.GetVelocity().X * 0;
+                        enemy.Steer(vx, 0);
                     }
                 }
             }
