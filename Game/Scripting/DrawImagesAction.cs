@@ -24,12 +24,12 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
             try
             {
                 // get the actors from the cast
-                List<Image> robots = scene.GetAllActors<Image>("robots");
+                List<Image> assets = scene.GetAllActors<Image>("assets");
 
                 // draw the actors on the screen using the video service
-                _videoService.ClearBuffer();
-                _videoService.Draw(robots);
-                _videoService.FlushBuffer();
+                // _videoService.ClearBuffer();
+                _videoService.Draw(assets);
+                // _videoService.FlushBuffer();
             }
             catch (Exception exception)
             {

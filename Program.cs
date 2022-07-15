@@ -32,9 +32,14 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             screen.SizeTo(480, 480);
             screen.MoveTo(0, 0); // screen (or raylib window) coordinates 
 
-            Actor world = new Actor();
+            // Actor world = new Actor();
+            // world.SizeTo(6752, 480);
+            // world.MoveTo(0, 0);
+
+            Image world = new Image();
             world.SizeTo(6752, 480);
             world.MoveTo(0, 0);
+            world.Display(@"Assets\Images\Background.png");
 
             // Image background = new Image();
             // background.SizeTo(6752, 480);
@@ -49,7 +54,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
                 Actor platform = new Actor();
                 platform.SizeTo(float.Parse(platformsData[0]), float.Parse(platformsData[1]));
                 platform.MoveTo(float.Parse(platformsData[2]), float.Parse(platformsData[3])); // world coordinates
-                platform.Tint(Color.Transparent());
+                platform.Tint(Color.White());
                 scene.AddActor("platforms", platform);
                 // if (platformsData[4] == "Floor")
                 // {
@@ -76,12 +81,14 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             scene.AddActor("actors", hero);
             scene.AddActor("labels", label);
             scene.AddActor("screen", screen);
+            scene.AddActor("assets", world);
             scene.AddActor("camera", camera);
 
             scene.AddAction(Phase.Input, steerActorAction);
             scene.AddAction(Phase.Update, moveActorAction);
             scene.AddAction(Phase.Update, collideActorsAction);
             scene.AddAction(Phase.Output, drawActorAction);
+            scene.AddAction(Phase.Output, drawImagesAction);
 
             Director director = new Director(serviceFactory);
             director.Direct(scene);

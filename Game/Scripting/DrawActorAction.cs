@@ -31,7 +31,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
 
                 // draw the actors on the screen using the video service
                 _videoService.ClearBuffer();
-                _videoService.DrawGrid(100, Color.Gray(), camera);
+                _videoService.DrawGrid(32, Color.Gray(), camera);
                 _videoService.Draw(label);
                 _videoService.Draw(platforms, camera);
                 _videoService.Draw(actor, camera);
