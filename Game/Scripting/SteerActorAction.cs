@@ -14,6 +14,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
     public class SteerActorAction : Matt_Manleys_Plumbing_Extravaganza.Game.Scripting.Action
     {
         private IKeyboardService _keyboardService;
+        public float previousXDirection = 5;
 
         public SteerActorAction(IServiceFactory serviceFactory)
         {
@@ -34,16 +35,25 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 {
                     directionX = -5;
                     hero.ShowWalkLeft();
+                    previousXDirection = directionX;
                 }
                 else if (_keyboardService.IsKeyDown(KeyboardKey.D))
                 {
                     directionX = 5;
                     hero.ShowWalkRight();
+                    previousXDirection = directionX;
                 }
                 else
                 {
                     directionX = 0;
-                    hero.ShowIdle();
+                    if (previousXDirection > 0 & directionY == 0)
+                        {
+                            hero.ShowIdleRight();
+                        }
+                    else if (previousXDirection < 0 & directionY == 0)
+                        {
+                            hero.ShowIdleLeft();
+                        }
                 }
                 
                 // JUMP
@@ -53,11 +63,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                     {
                         directionY = -20;
                         hero.StartJump();
-                        if (directionX >= 0)
+                        if (previousXDirection > 0 & (!(directionY == 0)))
                         {
                             hero.ShowJumpRight();
                         }
-                        else
+                        else if (previousXDirection < 0 & (!(directionY == 0)))
                         {
                             hero.ShowJumpLeft();
                         }

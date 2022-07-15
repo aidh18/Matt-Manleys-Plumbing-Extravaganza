@@ -4,43 +4,39 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
     {
         public void ShowWalkLeft()
         {
-            string[] filePaths = new string[3];
-            filePaths[0] = @"Assets\Images\Mario2.png";
-            filePaths[1] = @"Assets\Images\Mario3.png";
-            filePaths[2] = @"Assets\Images\Mario4.png";
+            string[] filePaths = new string[4];
+            filePaths[0] = @"Assets\Images\MarioLeft1.png";
+            filePaths[1] = @"Assets\Images\MarioLeft2.png";
+            filePaths[2] = @"Assets\Images\MarioLeft3.png";
+            filePaths[3] = @"Assets\Images\MarioLeft2.png";
 
             this.Animate(filePaths, 0.2f, 60);
         }
         public void ShowWalkRight()
         {
-            string[] filePaths = new string[3];
-            filePaths[0] = @"Assets\Images\Mario2.png";
-            filePaths[1] = @"Assets\Images\Mario3.png";
-            filePaths[2] = @"Assets\Images\Mario4.png";
+            string[] filePaths = new string[4];
+            filePaths[0] = @"Assets\Images\MarioRight1.png";
+            filePaths[1] = @"Assets\Images\MarioRight2.png";
+            filePaths[2] = @"Assets\Images\MarioRight3.png";
+            filePaths[3] = @"Assets\Images\MarioRight2.png";
 
             this.Animate(filePaths, 0.2f, 60);
         }
-        public void ShowIdle()
+        public void ShowIdleRight()
         {
-            this.Display(@"Assets\Images\Mario1.png");
+            this.Display(@"Assets\Images\MarioRightIdle.png");
+        }
+        public void ShowIdleLeft()
+        {
+            this.Display(@"Assets\Images\MarioLeftIdle.png");
         }
         public void ShowJumpLeft()
         {
-            string[] filePaths = new string[3];
-            filePaths[0] = @"Assets\Images\Mario2.png";
-            filePaths[1] = @"Assets\Images\Mario3.png";
-            filePaths[2] = @"Assets\Images\Mario4.png";
-
-            this.Animate(filePaths, 0.2f, 60);
+            this.Display(@"Assets\Images\MarioJumpLeft");
         }
         public void ShowJumpRight()
         {
-            string[] filePaths = new string[3];
-            filePaths[0] = @"Assets\Images\Mario2.png";
-            filePaths[1] = @"Assets\Images\Mario3.png";
-            filePaths[2] = @"Assets\Images\Mario4.png";
-
-            this.Animate(filePaths, 0.2f, 60);
+            this.Display(@"Assets\Images\MarioJumpRight");
         }
         private bool jumping = false;
 

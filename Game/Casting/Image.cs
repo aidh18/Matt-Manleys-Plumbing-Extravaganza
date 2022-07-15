@@ -53,7 +53,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
                     _index = Math.Min(_index + 1, _files.Length - 1);
                 }
             }
-            Console.WriteLine($"index: {_index}, file length: {_files.Length}");
             return _files[_index].Trim();
         }
 
