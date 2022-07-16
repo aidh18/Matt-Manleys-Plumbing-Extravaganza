@@ -41,9 +41,9 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             enemy.SizeTo(32, 32);
             enemy.MoveTo(1280, 384);
             string[] filePaths = new string[3];
-            filePaths[0] = @"Assets\Images\Enemy1.png";
-            filePaths[1] = @"Assets\Images\Enemy2.png";
-            enemy.Animate(filePaths, 0.2f, 60);
+            filePaths[0] = @"Assets\Images\MattEnemy1.png";
+            filePaths[1] = @"Assets\Images\MattEnemy2.png";
+            enemy.Animate(filePaths, 1, 60);
             enemy.Steer(3, 0);
 
             // Draw the locations of the platforms from the text file and instantiate them

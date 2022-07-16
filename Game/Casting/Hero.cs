@@ -32,11 +32,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         }
         public void ShowJumpLeft()
         {
-            this.Display(@"Assets\Images\MarioJumpLeft");
+            this.Display(@"Assets\Images\MarioJumpLeft.png");
         }
         public void ShowJumpRight()
         {
-            this.Display(@"Assets\Images\MarioJumpRight");
+            this.Display(@"Assets\Images\MarioJumpRight.png");
         }
         private bool jumping = false;
 
