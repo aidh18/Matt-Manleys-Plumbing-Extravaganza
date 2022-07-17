@@ -56,6 +56,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                     {
                         float vx = enemy.GetVelocity().X * 0;
                         enemy.Steer(vx, 0);
+                        // enemy.Display(@"Assets\Images\GoombaDead.png");
+                        // enemies.Remove(enemy);
                     }
                 }
             }

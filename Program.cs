@@ -41,8 +41,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             enemy.SizeTo(32, 32);
             enemy.MoveTo(1280, 384);
             string[] filePaths = new string[3];
-            filePaths[0] = @"Assets\Images\MattEnemy1.png";
-            filePaths[1] = @"Assets\Images\MattEnemy2.png";
+            filePaths[0] = @"Assets\Images\Goomba1.png";
+            filePaths[1] = @"Assets\Images\Goomba2.png";
             enemy.Animate(filePaths, 1, 60);
             enemy.Steer(3, 0);
 
