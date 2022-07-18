@@ -16,12 +16,9 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         private int _index = 0;
         private int _keyFrame = 0;
         private bool _repeated = false;
-        public string[] _enemyFilePaths = new string[2];
+        public bool hasDied = false;
         
-        public Image() {
-            _enemyFilePaths[0] = @"Assets\Images\Goomba1.png";
-            _enemyFilePaths[1] = @"Assets\Images\Goomba2.png";
-        }
+        public Image() { }
 
         public virtual void Animate(string[] files, float duration, int frameRate)
         {

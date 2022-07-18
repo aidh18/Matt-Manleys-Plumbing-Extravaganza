@@ -16,6 +16,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
         private IAudioService _audioService;
         private ISettingsService _settingsService;
 
+        bool isGrounded = false;
+
         public CollideActorsAction(IServiceFactory serviceFactory)
         {
             _keyboardService = serviceFactory.GetKeyboardService();
@@ -57,6 +59,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                             float x = platform.GetLeft() - player.GetWidth();
                             float y = player.GetTop();
                             player.MoveTo(x, y);
+                            isGrounded = true;
                         }
                         else if (collisionDirection == 2) // Hits right side of platform
                         {
@@ -64,6 +67,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                             float x = platform.GetRight();
                             float y = player.GetTop();
                             player.MoveTo(x, y);
+                            isGrounded = true;
                         }
                         else if (collisionDirection == 3) // Lands on top of platform
                         {
@@ -71,6 +75,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                             float x = player.GetLeft();
                             float y = platform.GetTop() - player.GetHeight();
                             player.MoveTo(x, y);
+                            isGrounded = true;
                         }
                         else if (collisionDirection == 4) // Hits bottom of platform
                         {
@@ -78,6 +83,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                             float x = player.GetLeft();
                             float y = platform.GetBottom();
                             player.MoveTo(x, y);
+                            isGrounded = true;
+                        }
+                        else
+                        {
+                            isGrounded = false;
                         }
                     }
                 }
@@ -99,7 +109,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                         _audioService.PlaySound(enemyDied);
                         float vx = enemy.GetVelocity().X * 0;
                         enemy.Steer(vx, 0);
-                        enemy.Display(@"Assets\Images\GoombaDead.png");
+                        if (!(enemy.hasDied))
+                        {
+                            enemy.Display(@"Assets\Images\GoombaDead.png");
+                            enemy.hasDied = true;
+                        }
                         // enemies.Remove(enemy);
                     }
                 }

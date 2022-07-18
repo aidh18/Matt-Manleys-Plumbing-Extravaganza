@@ -45,7 +45,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
                 Image enemy = new Image();
                 enemy.SizeTo(32, 32);
                 enemy.MoveTo(float.Parse(enemiesData[0]), float.Parse(enemiesData[1]));
-                enemy.Animate(enemy._enemyFilePaths, 1, 60);
+                enemy.Display(@"Assets\Images\Goomba1");
                 enemy.Steer(3, 0);
                 scene.AddActor("enemies", enemy);
             }
