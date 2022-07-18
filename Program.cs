@@ -10,6 +10,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
     internal class Program
     {
         static readonly string platformsFile = @"Assets\LevelData\platforms.txt";
+        static readonly string enemiesFile = @"Assets\LevelData\enemy_locations.txt";
         
         static void Main(string[] args)
         {
@@ -37,18 +38,21 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             world.MoveTo(0, 0);
             world.Display(@"Assets\Images\Background.png");
 
-            Image enemy = new Image();
-            enemy.SizeTo(32, 32);
-            enemy.MoveTo(1280, 384);
-            string[] filePaths = new string[3];
-            filePaths[0] = @"Assets\Images\Goomba1.png";
-            filePaths[1] = @"Assets\Images\Goomba2.png";
-            enemy.Animate(filePaths, 1, 60);
-            enemy.Steer(3, 0);
+            string[] enemyLines = File.ReadAllLines(enemiesFile);  
+            foreach(string line in enemyLines)
+            {
+                String[] enemiesData = line.Split(", ", 2, StringSplitOptions.RemoveEmptyEntries);
+                Image enemy = new Image();
+                enemy.SizeTo(32, 32);
+                enemy.MoveTo(float.Parse(enemiesData[0]), float.Parse(enemiesData[1]));
+                enemy.Animate(enemy._enemyFilePaths, 1, 60);
+                enemy.Steer(3, 0);
+                scene.AddActor("enemies", enemy);
+            }
 
             // Draw the locations of the platforms from the text file and instantiate them
-            string[] lines = File.ReadAllLines(platformsFile);  
-            foreach(string line in lines)
+            string[] platformLines = File.ReadAllLines(platformsFile);  
+            foreach(string line in platformLines)
             {
                 String[] platformsData = line.Split(", ", 5, StringSplitOptions.RemoveEmptyEntries);
                 Actor platform = new Actor();
@@ -57,6 +61,12 @@ namespace Matt_Manleys_Plumbing_Extravaganza
                 platform.Tint(Color.Transparent());
                 scene.AddActor("platforms", platform);
             }
+
+            Actor flagpole = new Actor();
+            flagpole.SizeTo(16, 304);
+            flagpole.MoveTo(6344, 80);
+            flagpole.Tint(Color.Transparent());
+
 
             Camera camera = new Camera(hero, screen, world);
 
@@ -73,7 +83,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza
             scene.AddActor("screen", screen);
             scene.AddActor("assets", world);
             scene.AddActor("camera", camera);
-            scene.AddActor("enemies", enemy);
+            scene.AddActor("flagpole", flagpole);
 
             scene.AddAction(Phase.Input, steerActorAction);
             scene.AddAction(Phase.Update, moveActorAction);

@@ -2,18 +2,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 {
     public class Hero : Image
     {
-
-        public int DetectCollisionDirection(Hero player, Actor platform)
-        {
-            int collisionLocation;
-
-            if (player.GetRight() > platform.GetLeft() && player.GetLeft() < platform.GetRight() - player.GetWidth() / 2 && player.GetBottom() > platform.GetTop())
-            {
-                collisionLocation = 1;
-            }
-
-            return collisionLocation;
-        }
         public void ShowWalkLeft()
         {
             string[] filePaths = new string[4];

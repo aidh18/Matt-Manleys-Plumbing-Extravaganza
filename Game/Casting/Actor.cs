@@ -67,27 +67,41 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
             }
         }
 
-        // public void isGrounded()
-        // {
-        //     {
-        //         float y = GetBottom();
-
-        //         float maxX = region.GetRight() - GetWidth();
-        //         float maxY = region.GetBottom() - GetHeight();
-        //         float minX = region.GetLeft();
-        //         float minY = region.GetTop();
-
-        //         x = Math.Clamp(x, minX, maxX);
-        //         y = Math.Clamp(y, minY, maxY);
-
-        //         Vector2 newPosition = new Vector2(x, y);
-        //         MoveTo(newPosition);
-        //     }
-        // }
-
         public virtual void Enable()
         {
             _enabled = true;
+        }
+
+        public int DetectCollisionDirection(Actor platform)
+        {
+            int collisionDirection = 0;
+            
+            // if (this.GetRight() < platform.GetLeft() && this.GetLeft() < platform.GetLeft() - this.GetWidth() + 3 && this.GetBottom() > platform.GetTop() && this.GetTop() < platform.GetBottom())
+            if (this.GetRight() > platform.GetLeft() && this.GetLeft() < platform.GetRight() - this.GetWidth() / 2 && this.GetBottom() > platform.GetTop()) // MAYBE: && this.GetTop() < platform.GetBottom() + 10)
+            {
+                collisionDirection = 1;
+            }
+            // else if (this.GetLeft() > platform.GetRight() && this.GetRight() > platform.GetRight() + this.GetWidth() + 3 && this.GetBottom() > platform.GetTop() && this.GetTop() < platform.GetBottom())
+            else if (this.GetLeft() < platform.GetRight() && this.GetRight() > platform.GetLeft() + this.GetWidth() / 2 && this.GetBottom() > platform.GetTop()) // MAYBE: && this.GetTop() < platform.GetBottom() + 10)
+            {
+                // Player collides with right of platform
+                collisionDirection = 2;
+            }
+            // if (this.GetBottom() < platform.GetTop() && this.GetTop() < platform.GetTop() - this.GetHeight() - 3 && this.GetLeft() < platform.GetRight() && this.GetRight() > platform.GetLeft())
+            if (this.GetRight() - 5 > platform.GetLeft() && this.GetLeft() + 5 < platform.GetRight() && this.GetBottom() >= platform.GetTop() && this.GetTop() < platform.GetTop())
+            {
+                // Player collides with top of platform
+                collisionDirection = 3;
+            }
+            // else if (this.GetTop() > platform.GetBottom() && this.GetBottom() < platform.GetTop() + this.GetHeight() + 3 && this.GetLeft() < platform.GetRight() && this.GetRight() > platform.GetLeft())
+            // else if (this.GetRight() - 1 > platform.GetLeft() && this.GetLeft() + 1 < platform.GetRight() + this.GetWidth() && this.GetTop() <= platform.GetBottom())
+            else if (this.GetRight() - 5 > platform.GetLeft() && this.GetLeft() + 5 < platform.GetRight() && this.GetTop() >= platform.GetBottom())
+            {
+                // Player collides with bottom of platform
+                collisionDirection = 4;
+            }
+
+            return collisionDirection;
         }
 
         public virtual void Disable()

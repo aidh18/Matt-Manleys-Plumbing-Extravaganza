@@ -14,11 +14,15 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
     public class SteerActorAction : Matt_Manleys_Plumbing_Extravaganza.Game.Scripting.Action
     {
         private IKeyboardService _keyboardService;
+        private IAudioService _audioService;
+        private ISettingsService _settingsService;
         public float previousXDirection = 5;
 
         public SteerActorAction(IServiceFactory serviceFactory)
         {
             _keyboardService = serviceFactory.GetKeyboardService();
+            _audioService = serviceFactory.GetAudioService();
+            _settingsService = serviceFactory.GetSettingsService();
         }
 
         public override void Execute(Scene scene, float deltaTime, IActionCallback callback)
@@ -29,6 +33,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 // declare direction variables
                 float directionX = hero.GetVelocity().X;
                 float directionY = hero.GetVelocity().Y;
+                string playerJump = _settingsService.GetString("playerJump");
 
                 // determine horizontal or x-axis direction
                 if (_keyboardService.IsKeyDown(KeyboardKey.A))
@@ -61,6 +66,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 {
                     if (_keyboardService.IsKeyPressed(KeyboardKey.W))
                     {
+                        _audioService.PlaySound(playerJump);
                         directionY = -20;
                         hero.StartJump();
                         if (previousXDirection > 0 & (!(directionY == 0)))

@@ -3,5 +3,8 @@
   "screenCaption": "Matt_Manleys_Plumbing_Extravaganza",
   "screenWidth": 480,
   "screenHeight": 480,
-  "backgroundMusic": "Assets/Sounds/SuperMarioBrosTheme.mp3"
+  "backgroundMusic": "Assets/Sounds/SuperMarioBrosTheme.mp3",
+  "playerJump": "Assets/Sounds/MarioJump.mp3",
+  "playerWin": "Assets/Sounds/MarioWin.mp3",
+  "enemyDied": "Assets/Sounds/EnemyDied.mp3"
 }
