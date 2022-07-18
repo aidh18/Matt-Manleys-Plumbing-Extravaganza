@@ -1,23 +1,52 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Casting;
-using Matt_Manleys_Plumbing_Extravaganza.Game.Directing;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Scripting;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Services;
 
-namespace Matt_Manleys_Plumbing_Extravaganza
+
+namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
 {
-    internal class Program
+    /// <summary>
+    /// Draws the actors on the screen.
+    /// </summary>
+    public class ResetGameAction : Matt_Manleys_Plumbing_Extravaganza.Game.Scripting.Action
     {
+        private ISettingsService _settingsService;
+        private IAudioService _audioService;
         static readonly string platformsFile = @"Assets\LevelData\platforms.txt";
         static readonly string enemiesFile = @"Assets\LevelData\enemy_locations.txt";
-        
-        static void Main(string[] args)
-        {
-            Scene scene = new Scene();
 
-            // Instantiate a service factory for other objects to use.
-            IServiceFactory serviceFactory = new RaylibServiceFactory();
+        public ResetGameAction(IServiceFactory serviceFactory)
+        {
+            _settingsService = serviceFactory.GetSettingsService();
+            _audioService = serviceFactory.GetAudioService();
+        }
+
+        public override void Execute(Scene scene, float deltaTime, IActionCallback callback)
+        {
+            try
+            {
+                Hero player = (Hero) scene.GetFirstActor("actors");
+                string playerDied = _settingsService.GetString("playerDied");
+                string playerWin = _settingsService.GetString("playerWin");
+
+                if (player.isDead && (!(_audioService.IsPlayingSound(playerDied))))
+                {
+                    Console.WriteLine("IF ACTIVATED");
+                    reloadCast(scene);
+                }
+            }
+            catch (Exception exception)
+            {
+                callback.OnError("Couldn't reset game.", exception);
+            }
+        }
+        
+        private void reloadCast(Scene scene)
+        {
+            scene.ClearCast();
             
             // Instantiate the actors that are used
             Label label = new Label();
@@ -70,31 +99,13 @@ namespace Matt_Manleys_Plumbing_Extravaganza
 
             Camera camera = new Camera(hero, screen, world);
 
-            // Instantiate the actions that use the actors.
-            SteerActorAction steerActorAction = new SteerActorAction(serviceFactory);
-            MoveActorAction moveActorAction = new MoveActorAction(serviceFactory);
-            CollideActorsAction collideActorsAction = new CollideActorsAction(serviceFactory);
-            ResetGameAction resetGameAction = new ResetGameAction(serviceFactory);
-            DrawActorAction drawActorAction = new DrawActorAction(serviceFactory);
-            PlayMusicAction playMusicAction = new PlayMusicAction(serviceFactory);
-
-            // Instantiate a new scene, add the actors and actions.
             scene.AddActor("actors", hero);
             scene.AddActor("labels", label);
             scene.AddActor("screen", screen);
             scene.AddActor("assets", world);
             scene.AddActor("camera", camera);
             scene.AddActor("flagpole", flagpole);
-
-            scene.AddAction(Phase.Input, steerActorAction);
-            scene.AddAction(Phase.Update, moveActorAction);
-            scene.AddAction(Phase.Update, collideActorsAction);
-            scene.AddAction(Phase.Output, drawActorAction);
-            scene.AddAction(Phase.Output, playMusicAction);
-            scene.AddAction(Phase.Output, resetGameAction);
-
-            Director director = new Director(serviceFactory);
-            director.Direct(scene);
         }
+
     }
 }

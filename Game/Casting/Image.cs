@@ -17,6 +17,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         private int _keyFrame = 0;
         private bool _repeated = false;
         public bool hasDied = false;
+        public bool movingRight = true;
         
         public Image() { }
 

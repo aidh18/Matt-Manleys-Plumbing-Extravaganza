@@ -26,16 +26,35 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
         {
             try
             {
+                Hero player = (Hero) scene.GetFirstActor("actors");
                 string backgroundMusic = _settingsService.GetString("backgroundMusic");
+                string playerWin = _settingsService.GetString("playerWin");
 
-                // start playing music if it isn't already
-                if (!_audioService.IsPlayingMusic(backgroundMusic))
+                // start playing music if it isn't already and the player is still alive
+                if ((!(player.isDead)) && (!(player.hasWon)))
                 {
-                    _audioService.PlayMusic(backgroundMusic);
+                    if (!_audioService.IsPlayingMusic(backgroundMusic))
+                    {
+                        _audioService.PlayMusic(backgroundMusic);
+                    }
+                    
+                    // update the audio buffer to keep playing it
+                    _audioService.UpdateMusic(backgroundMusic);
                 }
+                // else if (player.hasWon)
+                // {
+                //     _audioService.PauseMusic(backgroundMusic);
+                //     _audioService.PlaySound(playerWin);
 
-                // update the audio buffer to keep playing it
-                _audioService.UpdateMusic(backgroundMusic);
+                // }
+                // else if (player.isDead)
+                // {
+                //     _audioService.PauseMusic(backgroundMusic);
+                // }
+                else
+                {
+                    _audioService.PauseMusic(backgroundMusic);
+                }
             }
             catch (Exception exception)
             {

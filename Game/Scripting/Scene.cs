@@ -38,6 +38,10 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
             _cast.Clear();
             _script.Clear();
         }
+        public void ClearCast()
+        {
+            _cast.Clear();
+        }
 
         public List<Action> GetAllActions(int phase)
         {

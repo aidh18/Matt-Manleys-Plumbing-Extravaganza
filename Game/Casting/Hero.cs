@@ -2,6 +2,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 {
     public class Hero : Image
     {
+        public bool isDead = false;
+        public bool hasWon = false;
         public void ShowWalkLeft()
         {
             string[] filePaths = new string[4];
@@ -39,6 +41,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
             this.Display(@"Assets\Images\MarioJumpRight.png");
         }
         private bool jumping = false;
+        private bool grounded = false;
 
         public bool isJumping()
         {
@@ -53,9 +56,30 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         {
             jumping = false;
         }
-        public void HasDied()
+        public bool IsGrounded()
         {
-            
+            return grounded;
+        }
+        public void Ground()
+        {
+            grounded = true;
+        }
+        public void Unground()
+        {
+            grounded = false;
+        }
+        public void Wins()
+        {
+            hasWon = true;
+            if (this.GetTop() < 384)
+            {
+                this.Display(@"Assets\Images\MarioClimb.png");
+            }
+        }
+        public void Dies()
+        {
+            isDead = true;
+            this.Display(@"Assets\Images\MarioDeath.png");
         }
     }
 }

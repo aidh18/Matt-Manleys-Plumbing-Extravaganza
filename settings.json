@@ -6,5 +6,6 @@
   "backgroundMusic": "Assets/Sounds/SuperMarioBrosTheme.mp3",
   "playerJump": "Assets/Sounds/MarioJump.mp3",
   "playerWin": "Assets/Sounds/MarioWin.mp3",
-  "enemyDied": "Assets/Sounds/EnemyDied.mp3"
+  "enemyDied": "Assets/Sounds/EnemyDied.mp3",
+  "playerDied": "Assets/Sounds/MarioDied.mp3"
 }

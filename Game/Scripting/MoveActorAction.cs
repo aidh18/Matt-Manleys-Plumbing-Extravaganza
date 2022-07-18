@@ -37,7 +37,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 }
                 else
                 {
-                    hero.Move(5);
+                    hero.Move(8);
                 }
                 // keep actor inside world.
                 hero.ClampTo(world);
