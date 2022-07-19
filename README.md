@@ -1,7 +1,7 @@
-# Game Name
-Game info...
+# Matt Manley's Plumbing Extravaganza
+Run, jump around, and kill enemies in this exciting remake of the original Super Mario Bros! Play as the daring plumber, Mattio, and defeat the evil Matt Manlies, as you try to make it to the castle. 
 
----
+
 ## Getting Started
 Make sure you have dotnet 6.0 or newer installed on your machine. Open 
 a terminal and browse to the project's root folder. Start the program 
@@ -16,6 +16,7 @@ the Activity Bar. Next, select the project you'd like to run from the
 drop down list at the top of the Side Bar. Lastly, click the green 
 arrow or "start debugging" button.
 
+
 ## Project Structure
 The project files and folders are organized as follows:
 ```
@@ -26,9 +27,11 @@ root                                                (project root folder)
 +-- Matt_Manleys_Plumbing_Extravaganza.csproj       (dotnet project file)
 ```
 
+
 ## Required Technologies
 * dotnet 6.0
 * raylib-cs 3.7.0.1
+
 
 ## Authors
 * Andrew Leland

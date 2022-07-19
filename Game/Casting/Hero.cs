@@ -1,9 +1,56 @@
 namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 {
+    
+    /// <summary>
+    /// A visible actor that the player steers.
+    /// </summary>
     public class Hero : Image
     {
+
         public bool isDead = false;
         public bool hasWon = false;
+        public bool inFrontOfDoor = false;
+        private bool jumping = false;
+
+
+        public void Dies()
+        {
+            isDead = true;
+            this.Display(@"Assets\Images\MarioDeath.png");
+        }
+
+
+        public bool IsJumping()
+        {
+            
+            return jumping;
+        }
+
+
+        public void ShowIdleLeft()
+        {
+            this.Display(@"Assets\Images\MarioLeftIdle.png");
+        }
+
+
+        public void ShowIdleRight()
+        {
+            this.Display(@"Assets\Images\MarioRightIdle.png");
+        }
+
+
+        public void ShowJumpLeft()
+        {
+            this.Display(@"Assets\Images\MarioJumpLeft.png");
+        }
+
+
+        public void ShowJumpRight()
+        {
+            this.Display(@"Assets\Images\MarioJumpRight.png");
+        }
+
+
         public void ShowWalkLeft()
         {
             string[] filePaths = new string[4];
@@ -14,6 +61,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 
             this.Animate(filePaths, 0.2f, 60);
         }
+
+
         public void ShowWalkRight()
         {
             string[] filePaths = new string[4];
@@ -24,50 +73,20 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 
             this.Animate(filePaths, 0.2f, 60);
         }
-        public void ShowIdleRight()
-        {
-            this.Display(@"Assets\Images\MarioRightIdle.png");
-        }
-        public void ShowIdleLeft()
-        {
-            this.Display(@"Assets\Images\MarioLeftIdle.png");
-        }
-        public void ShowJumpLeft()
-        {
-            this.Display(@"Assets\Images\MarioJumpLeft.png");
-        }
-        public void ShowJumpRight()
-        {
-            this.Display(@"Assets\Images\MarioJumpRight.png");
-        }
-        private bool jumping = false;
-        private bool grounded = false;
 
-        public bool isJumping()
-        {
-            
-            return jumping;
-        }
+
         public void StartJump()
         {
             jumping = true;
         }
+
+
         public void StopJump()
         {
             jumping = false;
         }
-        public bool IsGrounded()
-        {
-            return grounded;
-        }
-        public void Ground()
-        {
-            grounded = true;
-        }
-        public void Unground()
-        {
-            grounded = false;
-        }
+
+
         public void Wins()
         {
             hasWon = true;
@@ -76,10 +95,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
                 this.Display(@"Assets\Images\MarioClimb.png");
             }
         }
-        public void Dies()
-        {
-            isDead = true;
-            this.Display(@"Assets\Images\MarioDeath.png");
-        }
+
     }
 }

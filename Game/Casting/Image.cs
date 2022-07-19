@@ -3,14 +3,13 @@ using System;
 
 namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 {
+    
     /// <summary>
     /// A visible Actor.
     /// </summary>
-    /// <remarks>
-    /// The responsibility of Image is to define the image-based appearance of an Actor.
-    /// </remarks>
     public class Image : Actor
     {
+        
         private string[] _files = new string[] { String.Empty };
         private int _frame = 0;
         private int _index = 0;

@@ -4,6 +4,7 @@ using System.Numerics;
 
 namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 {
+    
     /// <summary>
     /// A visible Actor.
     /// </summary>

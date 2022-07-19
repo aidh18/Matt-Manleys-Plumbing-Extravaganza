@@ -3,6 +3,7 @@ using System;
 
 namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting 
 {
+
     /// <summary>
     /// Receives action events.
     /// </summary>
@@ -15,4 +16,5 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
         void OnStop();
         void OnError(string message, Exception exception);
     }
+    
 }

@@ -1,20 +1,25 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+
 
 namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 {
+
     /// <summary>
     /// A collection of Actors.
     /// </summary>
     public class Cast
     {
+
         private Dictionary<string, List<Actor>> _current 
             = new Dictionary<string, List<Actor>>();
             
+
         private Dictionary<string, List<Actor>> _removed 
             = new Dictionary<string, List<Actor>>();
 
+
         public Cast() { }
+
 
         public void Add(string group, Actor actor)
         {
@@ -32,6 +37,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
             }
         }
 
+
         public void ApplyChanges()
         {
             foreach (string group in _removed.Keys)
@@ -47,11 +53,13 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
             _removed.Clear();
         }
 
+
         public void Clear()
         {
             _current.Clear();
             _removed.Clear();
         }
+
 
         public List<Actor> GetAllActors(string group)
         {
@@ -63,6 +71,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
             }
             return results;
         }
+
 
         public List<T> GetAllActors<T>(string group)
         {
@@ -78,6 +87,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
             return results;
         }
 
+
         public Actor GetFirstActor(string group)
         {
             Validator.CheckNotBlank(group);
@@ -89,38 +99,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
             }
             return result;
         }
-
-        public T GetFirstActor<T>(string group)
-        {
-            Validator.CheckNotBlank(group);
-            T result = default(T);
-            List<T> actors = GetAllActors<T>(group);
-            if (actors.Count > 0)
-            {
-                result = actors[0];
-            }
-            return result;
-        }
-
-        public int GetTotalActors()
-        {
-            int total = 0;
-            foreach(List<Actor> actors in _current.Values)
-            {
-                total += actors.Count;
-            }
-            return total;
-        }
-
-        public void Remove(string group, Actor actor)
-        {
-            Validator.CheckNotBlank(group);
-            Validator.CheckNotNull(actor);
-            
-            if (!_removed[group].Contains(actor))
-            {
-                _removed[group].Add(actor);
-            }
-        }
+        
     }
 }
