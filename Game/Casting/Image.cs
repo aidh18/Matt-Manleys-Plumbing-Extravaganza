@@ -3,7 +3,7 @@ using System;
 
 namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 {
-    
+
     /// <summary>
     /// A visible Actor.
     /// </summary>
@@ -18,12 +18,15 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         public bool hasDied = false;
         public bool movingRight = true;
         
+
         public Image() { }
+
 
         public virtual void Animate(string[] files, float duration, int frameRate)
         {
             Animate(files, duration, frameRate, true);
         }
+
 
         public virtual void Animate(string[] files, float duration, int frameRate, bool repeated)
         {
@@ -32,12 +35,14 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
             _repeated = repeated;
         }
 
+
         public void Display(string file)
         {
             _files = new string[] { file };
             _repeated = false;
             _index = 0;
         }
+
 
         public string GetFile()
         {

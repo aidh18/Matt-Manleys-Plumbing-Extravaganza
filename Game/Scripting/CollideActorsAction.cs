@@ -98,12 +98,12 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                             enemy.Steer(vx, 0);
                             if (enemy.movingRight)
                             {
-                                enemy.Display(@"Assets\Images\Goomba2.png");
+                                enemy.Display(@"Assets\Images\MattEnemy2.png");
                                 enemy.movingRight = false;
                             }
                             else
                             {
-                                enemy.Display(@"Assets\Images\Goomba1.png");
+                                enemy.Display(@"Assets\Images\MattEnemy1.png");
                                 enemy.movingRight = true;
                             }
                         }
@@ -124,7 +124,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                             enemy.Steer(vx, 0);
                             if (!(enemy.hasDied))
                             {
-                                enemy.Display(@"Assets\Images\GoombaDead.png");
+                                enemy.Display(@"Assets\Images\MattGotBonked.png");
                                 enemy.hasDied = true;
                                 _audioService.PlaySound(enemyDied);
                             }
