@@ -39,12 +39,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
         }
 
 
-        public void GetScreenData()
-        {
-
-        }
-
-
         public void GetWorldData()
         {
 

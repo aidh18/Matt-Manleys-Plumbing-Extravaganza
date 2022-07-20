@@ -15,6 +15,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         string platformsFile = @"Assets\LevelData\Level1\platforms_locations.txt";
         string enemiesFile = @"Assets\LevelData\Level1\enemy_locations.txt";
         string flagpoleFile = @"Assets\LevelData\Level1\flagpole_location.txt";
+        string doorsFile = @"Assets\LevelData\Level1\doors_locations.txt";
+        string worldFile = @"Assets\LevelData\Level1\world_location.txt";
         
 
 
@@ -115,6 +117,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
                 hero.SizeTo(32, 32);
                 hero.MoveTo(96, 384); // world coordinates
                 hero.Display(@"Assets\Images\Mario1.png");
+            }
+            else
+            {
+                hero.MoveTo(32, 240);
+                hero.LockVelocity();
             }
 
             Actor screen = new Actor();

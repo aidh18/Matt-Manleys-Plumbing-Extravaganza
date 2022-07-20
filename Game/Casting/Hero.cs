@@ -11,6 +11,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         public bool hasWon = false;
         public bool inFrontOfDoor = false;
         private bool jumping = false;
+        public bool velocityLocked = false;
 
 
         public void Dies()
@@ -24,6 +25,13 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         {
             
             return jumping;
+        }
+
+
+        public void LockVelocity()
+        {
+            this.Steer(5, -8);
+            velocityLocked = true;
         }
 
 

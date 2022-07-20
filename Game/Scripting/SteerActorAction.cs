@@ -143,7 +143,10 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
 
 
                 // Steer the actor in the desired direction.
-                hero.Steer(directionX, directionY);
+                if (!(hero.velocityLocked))
+                {
+                    hero.Steer(directionX, directionY);
+                }
 
             }
 
