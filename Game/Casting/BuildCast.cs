@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Matt_Manleys_Plumbing_Extravaganza.Game.Scripting;
+using Matt_Manleys_Plumbing_Extravaganza.Game.Services;
 
 
 namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
@@ -12,18 +13,10 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
     public class BuildCast
     {
         
-        string platformsFile = @"Assets\LevelData\Level1\platforms_locations.txt";
-        string enemiesFile = @"Assets\LevelData\Level1\enemy_locations.txt";
-        string flagpoleFile = @"Assets\LevelData\Level1\flagpole_location.txt";
-        string doorsFile = @"Assets\LevelData\Level1\doors_locations.txt";
-        string worldFile = @"Assets\LevelData\Level1\world_location.txt";
-        
-
-
         public BuildCast () { }
 
 
-        public void CreateNewDoors(Scene scene)
+        public void CreateNewDoors(Scene scene, LevelDataService levelDataService)
         {
             Image door1 = new Image();
             door1.SizeTo(32, 64);
@@ -40,9 +33,9 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         }
 
 
-        public void CreateNewEnemies(Scene scene)
+        public void CreateNewEnemies(Scene scene, LevelDataService levelDataService)
         {
-            string[] enemyLines = File.ReadAllLines(enemiesFile);  
+            string[] enemyLines = levelDataService.GetEnemiesData();  
             foreach(string line in enemyLines)
             {
                 String[] enemiesData = line.Split(", ", 2, StringSplitOptions.RemoveEmptyEntries);
@@ -56,9 +49,9 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         }
             
 
-        public void CreateNewFlagpole(Scene scene)
+        public void CreateNewFlagpole(Scene scene, LevelDataService levelDataService)
         {
-            string[] flagpoleLines = File.ReadAllLines(flagpoleFile); 
+            string[] flagpoleLines = levelDataService.GetFlagpoleData(); 
             foreach(string line in flagpoleLines)
             {
                 String[] flagpoleData = line.Split(", ", 2, StringSplitOptions.RemoveEmptyEntries);
@@ -72,7 +65,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         }
 
 
-        public void CreateNewLabel(Scene scene, int lives)
+        public void CreateNewLabel(Scene scene, int lives, LevelDataService levelDataService)
         {
             Label label = new Label();
             if (lives == 0)
@@ -92,10 +85,10 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         }
 
 
-        public void CreateNewPlatforms(Scene scene)
+        public void CreateNewPlatforms(Scene scene, LevelDataService levelDataService)
         {
             // Draw the locations of the platforms from the text file and instantiate them
-            string[] platformLines = File.ReadAllLines(platformsFile);  
+            string[] platformLines = levelDataService.GetPlatformsData();  
             foreach(string line in platformLines)
             {
                 String[] platformsData = line.Split(", ", 5, StringSplitOptions.RemoveEmptyEntries);
@@ -108,37 +101,48 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         }
 
 
-        public void CreateRegularActors(Scene scene, int lives)
+        public void CreateRegularActors(Scene scene, int lives, LevelDataService levelDataService)
         {
-            
-            Hero hero = new Hero();
-            if (lives > 0)
+            string[] heroLines = levelDataService.GetHeroData();
+            string[] worldLines = levelDataService.GetWorldData();
+            string backgroundFile = levelDataService.GetWorldImage();
+
+            foreach(string line in heroLines)
             {
-                hero.SizeTo(32, 32);
-                hero.MoveTo(96, 384); // world coordinates
-                hero.Display(@"Assets\Images\Mario1.png");
+                String[] heroData = line.Split(", ", 2, StringSplitOptions.RemoveEmptyEntries);
+                Hero hero = new Hero();
+                if (lives > 0)
+                {
+                    hero.SizeTo(32, 32);
+                    hero.MoveTo(float.Parse(heroData[0]), float.Parse(heroData[1]));
+                    hero.Display(@"Assets\Images\Mario1.png");
+                }
+                else
+                {
+                    hero.MoveTo(32, 240);
+                    hero.LockVelocity();
+                }
+                scene.AddActor("actors", hero);
             }
-            else
+
+            foreach(string line in worldLines)
             {
-                hero.MoveTo(32, 240);
-                hero.LockVelocity();
+                String[] worldData = line.Split(", ", 2, StringSplitOptions.RemoveEmptyEntries);
+                Image world = new Image();
+                world.SizeTo(float.Parse(worldData[0]), float.Parse(worldData[1]));
+                world.MoveTo(0, 0);
+                world.Display(backgroundFile);
+                scene.AddActor("world", world);
             }
 
             Actor screen = new Actor();
             screen.SizeTo(480, 480);
-            screen.MoveTo(0, 0); // screen (or raylib window) coordinates 
-
-            Image world = new Image();
-            world.SizeTo(6752, 480);
-            world.MoveTo(0, 0);
-            world.Display(@"Assets\Images\Background.png");
+            screen.MoveTo(0, 0);
             
-            Camera camera = new Camera(hero, screen, world);
+            Camera camera = new Camera(scene.GetFirstActor("actors"), screen, scene.GetFirstActor("world"));
 
-            scene.AddActor("actors", hero);
-            scene.AddActor("camera", camera);
-            scene.AddActor("world", world);
             scene.AddActor("screen", screen);
+            scene.AddActor("camera", camera);
         }
 
     }

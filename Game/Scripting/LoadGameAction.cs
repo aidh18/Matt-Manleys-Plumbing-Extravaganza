@@ -36,6 +36,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 Hero player = (Hero) scene.GetFirstActor("actors");
                 string playerDied = _settingsService.GetString("playerDied");
                 string playerWin = _settingsService.GetString("playerWin");
+                _levelDataService.SetLevelNumber(levelNumber);
 
                 if (player.hasDied && (!(_audioService.IsPlayingSound(playerDied))))
                 {
@@ -44,7 +45,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 else if (player.hasWon && (!(_audioService.IsPlayingSound(playerWin))))
                 {
                     levelNumber += 1;
-                    _levelDataService.SetLevelNumber(levelNumber);
                     playerLives += 2;
                     ReloadCast(scene);
                 }
@@ -63,30 +63,32 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
         // Loads the cast initially.
         public void LoadCastInitially(Scene scene)
         {
+            _levelDataService.SetLevelNumber(levelNumber);
             BuildCast buildCast = new BuildCast();
 
-            buildCast.CreateNewLabel(scene, playerLives);
-            buildCast.CreateRegularActors(scene, playerLives);
-            buildCast.CreateNewEnemies(scene);
-            buildCast.CreateNewPlatforms(scene);
-            buildCast.CreateNewDoors(scene);
-            buildCast.CreateNewFlagpole(scene);
+            buildCast.CreateNewLabel(scene, playerLives, _levelDataService);
+            buildCast.CreateRegularActors(scene, playerLives, _levelDataService);
+            buildCast.CreateNewEnemies(scene, _levelDataService);
+            buildCast.CreateNewPlatforms(scene, _levelDataService);
+            buildCast.CreateNewDoors(scene, _levelDataService);
+            buildCast.CreateNewFlagpole(scene, _levelDataService);
         }
         
 
         // Clears and reloads the cast
         private void ReloadCast(Scene scene)
         {
+            _levelDataService.SetLevelNumber(levelNumber);
             BuildCast buildCast = new BuildCast();
             scene.ClearCast();
             playerLives -= 1;
             
-            buildCast.CreateNewLabel(scene, playerLives);
-            buildCast.CreateRegularActors(scene, playerLives);
-            buildCast.CreateNewEnemies(scene);
-            buildCast.CreateNewPlatforms(scene);
-            buildCast.CreateNewDoors(scene);
-            buildCast.CreateNewFlagpole(scene);
+            buildCast.CreateNewLabel(scene, playerLives, _levelDataService);
+            buildCast.CreateRegularActors(scene, playerLives, _levelDataService);
+            buildCast.CreateNewEnemies(scene, _levelDataService);
+            buildCast.CreateNewPlatforms(scene, _levelDataService);
+            buildCast.CreateNewDoors(scene, _levelDataService);
+            buildCast.CreateNewFlagpole(scene, _levelDataService);
         }
 
     }

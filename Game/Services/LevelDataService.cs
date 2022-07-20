@@ -1,4 +1,5 @@
-using Matt_Manleys_Plumbing_Extravaganza.Game.Scripting;
+using System.IO;
+
 
 namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
 {
@@ -9,21 +10,35 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
         public LevelDataService() { }
 
 
-        public void GetDoorsData()
+        public string[] GetDoorsData()
         {
-
+            string fileLocation = $@"Assets\LevelData\Level{levelNumber}\doors_locations.txt";
+            string[] fileText = File.ReadAllLines(fileLocation);
+            return fileText;
         }
 
 
-        public void GetEnemiesData()
+        public string[] GetEnemiesData()
         {
-
+            string fileLocation = $@"Assets\LevelData\Level{levelNumber}\enemies_locations.txt";
+            string[] fileText = File.ReadAllLines(fileLocation);
+            return fileText;
         }
 
 
-        public void GetFlagpoleData()
+        public string[] GetFlagpoleData()
         {
+            string fileLocation = $@"Assets\LevelData\Level{levelNumber}\flagpole_location.txt";
+            string[] fileText = File.ReadAllLines(fileLocation);
+            return fileText;
+        }
 
+
+        public string[] GetHeroData()
+        {
+            string fileLocation = $@"Assets\LevelData\Level{levelNumber}\hero_location.txt";
+            string[] fileText = File.ReadAllLines(fileLocation);
+            return fileText;
         }
         
         
@@ -33,15 +48,25 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
         }
 
 
-        public void GetPlatformsData()
+        public string[] GetPlatformsData()
         {
-
+            string fileLocation = $@"Assets\LevelData\Level{levelNumber}\platforms_locations.txt";
+            string[] fileText = File.ReadAllLines(fileLocation);
+            return fileText;
         }
 
 
-        public void GetWorldData()
+        public string[] GetWorldData()
         {
+            string fileLocation = $@"Assets\LevelData\Level{levelNumber}\world_size.txt";
+            string[] fileText = File.ReadAllLines(fileLocation);
+            return fileText;
+        }
 
+        public string GetWorldImage()
+        {
+            string fileLocation = $@"Assets\Images\Level{levelNumber}\Background.png";
+            return fileLocation;
         }
 
     }
