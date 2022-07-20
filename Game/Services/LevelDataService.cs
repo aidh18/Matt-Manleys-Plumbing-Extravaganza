@@ -10,14 +10,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
         public LevelDataService() { }
 
 
-        public string[] GetDoorsData()
-        {
-            string fileLocation = $@"Assets\LevelData\Level{levelNumber}\doors_locations.txt";
-            string[] fileText = File.ReadAllLines(fileLocation);
-            return fileText;
-        }
-
-
         public string[] GetEnemiesData()
         {
             string fileLocation = $@"Assets\LevelData\Level{levelNumber}\enemies_locations.txt";

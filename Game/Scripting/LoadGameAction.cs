@@ -87,8 +87,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
             buildCast.CreateRegularActors(scene, playerLives, _levelDataService);
             buildCast.CreateNewEnemies(scene, _levelDataService);
             buildCast.CreateNewPlatforms(scene, _levelDataService);
-            buildCast.CreateNewDoors(scene, _levelDataService);
             buildCast.CreateNewFlagpole(scene, _levelDataService);
+            if (levelNumber == 1)
+            {
+                buildCast.CreateNewDoors(scene, _levelDataService);
+            }
         }
 
     }
