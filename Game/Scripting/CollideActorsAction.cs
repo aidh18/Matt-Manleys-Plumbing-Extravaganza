@@ -157,7 +157,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                     player.Wins();
                     _audioService.StopMusic(backgroundMusic);
                     _audioService.PlaySound(playerWin);
-                    Console.WriteLine("Flag collision");
                     initialTouch = false;
                 }
  

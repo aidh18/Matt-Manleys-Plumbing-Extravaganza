@@ -80,7 +80,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                     else
                     {
                         directionX = 0;
-                        Console.WriteLine(directionY);
                         if (previousXDirection > 0 && directionY == 0)
                             {
                                 hero.ShowIdleRight();

@@ -14,6 +14,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         
         string platformsFile = @"Assets\LevelData\Level1\platforms_locations.txt";
         string enemiesFile = @"Assets\LevelData\Level1\enemy_locations.txt";
+        string flagpoleFile = @"Assets\LevelData\Level1\flagpole_location.txt";
+        
 
 
         public BuildCast () { }
@@ -54,11 +56,17 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 
         public void CreateNewFlagpole(Scene scene)
         {
-            Actor flagpole = new Actor();
-            flagpole.SizeTo(16, 304);
-            flagpole.MoveTo(6344, 80);
-            flagpole.Tint(Color.Transparent());
-            scene.AddActor("flagpole", flagpole);
+            string[] flagpoleLines = File.ReadAllLines(flagpoleFile); 
+            foreach(string line in flagpoleLines)
+            {
+                String[] flagpoleData = line.Split(", ", 2, StringSplitOptions.RemoveEmptyEntries);
+                Actor flagpole = new Actor();
+                flagpole.SizeTo(16, 304);
+                flagpole.MoveTo(float.Parse(flagpoleData[0]), float.Parse(flagpoleData[1]));
+                flagpole.Tint(Color.Transparent());
+                scene.AddActor("flagpole", flagpole);
+            }
+
         }
 
 
