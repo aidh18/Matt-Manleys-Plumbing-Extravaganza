@@ -7,7 +7,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
     public class Hero : Image
     {
 
-        public bool isDead = false;
+        public bool hasDied = false;
         public bool hasWon = false;
         public bool inFrontOfDoor = false;
         private bool jumping = false;
@@ -15,7 +15,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 
         public void Dies()
         {
-            isDead = true;
+            hasDied = true;
             this.Display(@"Assets\Images\MarioDeath.png");
         }
 

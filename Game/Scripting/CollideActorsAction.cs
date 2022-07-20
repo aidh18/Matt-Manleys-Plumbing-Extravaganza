@@ -36,6 +36,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 // Get the actors from the cast.
                 Hero player = (Hero) scene.GetFirstActor("actors");
                 Actor flagpole = scene.GetFirstActor("flagpole");
+                Actor world = scene.GetFirstActor("world");
                 List<Actor> platforms = scene.GetAllActors("platforms");
                 List<Image> enemies = scene.GetAllActors<Image>("enemies");
                 List<Image> doors = scene.GetAllActors<Image>("doors");
@@ -115,26 +116,39 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 foreach (Image enemy in enemies)
                 {
                     int collisionDirection = player.DetectCollisionDirection(enemy);
-                    if (!(player.isDead))
+                    if (!(player.hasDied))
                     {
                         // Resolve collision by either killing the enemy or killing the player.
                         if (enemy.Overlaps(player) && collisionDirection == 4)
                         {
                             float vx = enemy.GetVelocity().X * 0;
                             enemy.Steer(vx, 0);
-                            if (!(enemy.hasDied))
+                            if (!(enemy.gotSquashed))
                             {
                                 enemy.Display(@"Assets\Images\MattGotBonked.png");
-                                enemy.hasDied = true;
+                                enemy.gotSquashed = true;
                                 _audioService.PlaySound(enemyDied);
                             }
                         }
-                        else if (enemy.Overlaps(player) && (!(enemy.hasDied)))
+                        else if (enemy.Overlaps(player) && (!(enemy.gotSquashed)))
                         {   
                             player.Dies();
                             _audioService.PauseMusic(backgroundMusic);
                             _audioService.PlaySound(playerDied);
                         }
+                    }
+                }
+
+
+                // Detect a collision between the player and the bottom of the world.
+                if (!(player.hasDied))
+                {
+                    // Resolve collision by killing the player.
+                    if (player.GetBottom() == world.GetBottom())
+                    {
+                        player.Dies();
+                        _audioService.PauseMusic(backgroundMusic);
+                        _audioService.PlaySound(playerDied);
                     }
                 }
 

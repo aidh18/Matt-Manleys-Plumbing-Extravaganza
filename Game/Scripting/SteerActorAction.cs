@@ -43,7 +43,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 string playerGoThroughDoor = _settingsService.GetString("playerGoThroughDoor");
 
 
-                if ((!(hero.isDead)) && (!(hero.hasWon)))
+                if ((!(hero.hasDied)) && (!(hero.hasWon)))
                 {
                     // Teleport player when they use a door.
                     if (_keyboardService.IsKeyPressed(KeyboardKey.S))
@@ -122,7 +122,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                     }
 
                 }
-                else if (hero.isDead)
+                else if (hero.hasDied)
                 {
                     directionX = 0;
                     directionY = 0;

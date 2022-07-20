@@ -130,7 +130,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
 
             scene.AddActor("actors", hero);
             scene.AddActor("camera", camera);
-            scene.AddActor("assets", world);
+            scene.AddActor("world", world);
             scene.AddActor("screen", screen);
         }
 

@@ -15,7 +15,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         private int _index = 0;
         private int _keyFrame = 0;
         private bool _repeated = false;
-        public bool hasDied = false;
+        public bool gotSquashed = false;
         public bool movingRight = true;
         
 

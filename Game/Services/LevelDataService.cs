@@ -25,12 +25,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
         {
 
         }
-
-
-        public void GetHeroData()
-        {
-
-        }
         
         
         public void SetLevelNumber(int levelNum)

@@ -30,14 +30,14 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 Image actor = (Image) scene.GetFirstActor("actors");
                 Camera camera = (Camera) scene.GetFirstActor("camera");
                 List<Actor> platforms = scene.GetAllActors("platforms");
-                List<Image> assets = scene.GetAllActors<Image>("assets");
+                List<Image> world = scene.GetAllActors<Image>("world");
                 List<Image> enemies = scene.GetAllActors<Image>("enemies");
                 List<Image> doors = scene.GetAllActors<Image>("doors");
 
 
                 // Draw the actors on the screen using the video service.
                 _videoService.ClearBuffer();
-                _videoService.Draw(assets, camera);
+                _videoService.Draw(world, camera);
                 _videoService.Draw(label);
                 _videoService.Draw(platforms, camera);
                 _videoService.Draw(enemies, camera);

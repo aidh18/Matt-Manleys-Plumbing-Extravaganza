@@ -37,7 +37,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 string playerDied = _settingsService.GetString("playerDied");
                 string playerWin = _settingsService.GetString("playerWin");
 
-                if (player.isDead && (!(_audioService.IsPlayingSound(playerDied))))
+                if (player.hasDied && (!(_audioService.IsPlayingSound(playerDied))))
                 {
                     ReloadCast(scene);
                 }
