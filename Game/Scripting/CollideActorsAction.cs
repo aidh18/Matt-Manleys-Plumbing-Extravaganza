@@ -16,7 +16,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
         private IKeyboardService _keyboardService;
         private IAudioService _audioService;
         private ISettingsService _settingsService;
-        private bool initialTouch = true;
 
 
         public CollideActorsAction(IServiceFactory serviceFactory)
@@ -166,12 +165,15 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
 
                 // Detect a collision between the player and the flagpole.
                 // Resolve collision by telling the program that the player has won.
-                if ((initialTouch == true) && player.Overlaps(flagpole))
+                if ((!(player.hasWon)) && player.Overlaps(flagpole))
                 {
                     player.Wins();
                     _audioService.StopMusic(backgroundMusic);
                     _audioService.PlaySound(playerWin);
-                    initialTouch = false;
+                    if (!(_audioService.IsPlayingSound(playerWin)))
+                    {
+                        player.Reset();
+                    }
                 }
  
             }

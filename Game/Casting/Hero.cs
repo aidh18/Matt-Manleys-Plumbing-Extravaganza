@@ -35,6 +35,12 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         }
 
 
+        public void Reset()
+        {
+            this.hasWon = false;
+        }
+
+
         public void ShowIdleLeft()
         {
             this.Display(@"Assets\Images\MarioLeftIdle.png");

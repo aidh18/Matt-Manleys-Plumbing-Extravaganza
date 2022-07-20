@@ -37,7 +37,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 // Start playing music if it isn't already and the player is still alive.
                 if ((!(player.hasDied)) && (!(player.hasWon)))
                 {
-                    if (!_audioService.IsPlayingMusic(backgroundMusic))
+                    if (!(_audioService.IsPlayingMusic(backgroundMusic)))
                     {
                         _audioService.PlayMusic(backgroundMusic);
                     }
