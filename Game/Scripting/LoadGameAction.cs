@@ -14,6 +14,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
 
         private ISettingsService _settingsService;
         private IAudioService _audioService;
+        private LevelDataService _levelDataService;
+        private int levelNumber = 1;
         private int playerLives = 3;
 
 
@@ -21,6 +23,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
         {
             _settingsService = serviceFactory.GetSettingsService();
             _audioService = serviceFactory.GetAudioService();
+            _levelDataService = serviceFactory.GetLevelDataService();
         }
 
 
@@ -36,6 +39,13 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
 
                 if (player.isDead && (!(_audioService.IsPlayingSound(playerDied))))
                 {
+                    ReloadCast(scene);
+                }
+                else if (player.hasWon && (!(_audioService.IsPlayingSound(playerWin))))
+                {
+                    levelNumber += 1;
+                    _levelDataService.SetLevelNumber(levelNumber);
+                    playerLives += 2;
                     ReloadCast(scene);
                 }
 

@@ -12,8 +12,8 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
     public class BuildCast
     {
         
-        static readonly string platformsFile = @"Assets\LevelData\platforms.txt";
-        static readonly string enemiesFile = @"Assets\LevelData\enemy_locations.txt";
+        string platformsFile = @"Assets\LevelData\Level1\platforms_locations.txt";
+        string enemiesFile = @"Assets\LevelData\Level1\enemy_locations.txt";
 
 
         public BuildCast () { }

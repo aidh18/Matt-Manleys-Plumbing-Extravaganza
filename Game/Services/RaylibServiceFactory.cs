@@ -7,6 +7,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
         private static IMouseService MouseService;
         private static ISettingsService SettingsService;
         private static IVideoService VideoService;
+        private static LevelDataService LevelDataService;
 
         public RaylibServiceFactory()
         {
@@ -15,6 +16,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
             KeyboardService = new RaylibKeyboardService();
             MouseService = new RaylibMouseService();
             VideoService = new RaylibVideoService(SettingsService);
+            LevelDataService= new LevelDataService();
         }
 
         public RaylibServiceFactory(string filepath)
@@ -24,6 +26,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
             KeyboardService = new RaylibKeyboardService();
             MouseService = new RaylibMouseService();
             VideoService = new RaylibVideoService(SettingsService);
+            LevelDataService= new LevelDataService();
         }
 
         public IAudioService GetAudioService()
@@ -50,5 +53,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
         {
             return VideoService;
         }
+
+        public LevelDataService GetLevelDataService()
+        {
+            return LevelDataService;
+        }
+
     }
 }

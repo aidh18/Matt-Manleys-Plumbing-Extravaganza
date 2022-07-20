@@ -7,5 +7,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
         IMouseService GetMouseService();
         ISettingsService GetSettingsService();
         IVideoService GetVideoService();
+        LevelDataService GetLevelDataService();
     }
 }
