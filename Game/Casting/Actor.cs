@@ -18,6 +18,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         private Vector2 _size = Vector2.Zero;
         private Color _tint = Color.White();
         private Vector2 _velocity = Vector2.Zero;
+        public bool canJump = false;
         
 
         public Actor() { }
@@ -46,43 +47,56 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         }
 
 
-        public int DetectCollisionDirection(Actor platform)
+        public int DetectCollisionDirection(Actor other)
         {
             int collisionDirection = 0;
             
-            if (this.GetRight() - 5 > platform.GetLeft() && 
-            this.GetLeft() + 5 < platform.GetRight() && 
-            this.GetTop() < platform.GetBottom())
+            if (this.GetRight() - 5 > other.GetLeft() && 
+            this.GetLeft() + 5 < other.GetRight() && 
+            this.GetTop() < other.GetBottom())
             {
-                // Player collides with bottom of platform
+                // Player collides with bottom of other
                 collisionDirection = 1;
             }
-            // if (this.GetRight() < platform.GetLeft() && this.GetLeft() < platform.GetLeft() - this.GetWidth() + 3 && this.GetBottom() > platform.GetTop() && this.GetTop() < platform.GetBottom())
-            else if (this.GetRight() > platform.GetLeft() && 
-            this.GetLeft() < platform.GetRight() - this.GetWidth() / 2 && 
-            (this.GetBottom() > platform.GetTop() || this.GetTop() < platform.GetBottom()))
+            else if (this.GetRight() > other.GetLeft() && 
+            this.GetLeft() < other.GetRight() - this.GetWidth() / 2 && 
+            (this.GetBottom() > other.GetTop() || this.GetTop() < other.GetBottom()))
             {
                 collisionDirection = 2;
             }
-            // else if (this.GetLeft() > platform.GetRight() && this.GetRight() > platform.GetRight() + this.GetWidth() + 3 && this.GetBottom() > platform.GetTop() && this.GetTop() < platform.GetBottom())
-            else if (this.GetLeft() < platform.GetRight() && 
-            this.GetRight() > platform.GetLeft() + this.GetWidth() / 2 && 
-            (this.GetBottom() > platform.GetTop() || this.GetTop() < platform.GetBottom()))
+            else if (this.GetLeft() < other.GetRight() && 
+            this.GetRight() > other.GetLeft() + this.GetWidth() / 2 && 
+            (this.GetBottom() > other.GetTop() || this.GetTop() < other.GetBottom()))
             {
-                // Player collides with right of platform
+                // Player collides with right of other
                 collisionDirection = 3;
             }
-            // if (this.GetBottom() < platform.GetTop() && this.GetTop() < platform.GetTop() - this.GetHeight() - 3 && this.GetLeft() < platform.GetRight() && this.GetRight() > platform.GetLeft())
-            if (this.GetRight() - 5 > platform.GetLeft() && 
-            this.GetLeft() + 5 < platform.GetRight() && 
-            this.GetBottom() >= platform.GetTop() && 
-            this.GetTop() < platform.GetTop())
+            if (this.GetRight() - 5 > other.GetLeft() && 
+            this.GetLeft() + 5 < other.GetRight() && 
+            this.GetBottom() >= other.GetTop() && 
+            this.GetTop() < other.GetTop())
             {
-                // Player collides with top of platform
+                // Player collides with top of other
                 collisionDirection = 4;
             }
 
             return collisionDirection;
+        }
+
+        public void DetermineIfCanJump(Actor other)
+        {
+            if (this.GetBottom == other.GetTop)
+            {
+                canJump = true;
+            }
+            else if (this.GetBottom == other.GetBottom)
+            {
+                canJump = true;
+            }
+            else
+            {
+                canJump = false;
+            }
         }
 
 

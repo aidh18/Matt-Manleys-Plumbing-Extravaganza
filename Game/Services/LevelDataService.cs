@@ -32,11 +32,11 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
             string[] fileText = File.ReadAllLines(fileLocation);
             return fileText;
         }
-        
-        
-        public void SetLevelNumber(int levelNum)
+
+
+        public int GetLevelNumber()
         {
-            this.levelNumber = levelNum;
+            return levelNumber;
         }
 
 
@@ -59,6 +59,12 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Services
         {
             string fileLocation = $@"Assets\Images\Level{levelNumber}\Background.png";
             return fileLocation;
+        }
+        
+        
+        public void SetLevelNumber(int levelNum)
+        {
+            this.levelNumber = levelNum;
         }
 
     }

@@ -50,9 +50,12 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 {
                     if (player.Overlaps(platform))
                     {
+                        // Check if player can jump or not depending on collision
+                        player.DetermineIfCanJump(platform);
+
                         int collisionDirection = player.DetectCollisionDirection(platform);
 
-                        // Resolve collision by moving the actor to the correct side
+                        // Resolve collision by moving the player to the correct side
                         // Player hits bottom of platform.
                         if (collisionDirection == 1)
                         {

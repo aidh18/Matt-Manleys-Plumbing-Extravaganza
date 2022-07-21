@@ -68,9 +68,18 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
         public void CreateNewLabel(Scene scene, int lives, LevelDataService levelDataService)
         {
             Label label = new Label();
+            int levelNumber = levelDataService.GetLevelNumber();
+
             if (lives == 0)
             {
                 label.Display("GAME OVER");
+                label.MoveTo(25, 25);
+                label._fontSize = 72f;
+                scene.AddActor("labels", label);
+            }
+            else if (levelNumber == 4)
+            {
+                label.Display("YOU WIN!!");
                 label.MoveTo(25, 25);
                 label._fontSize = 72f;
                 scene.AddActor("labels", label);
@@ -106,12 +115,13 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
             string[] heroLines = levelDataService.GetHeroData();
             string[] worldLines = levelDataService.GetWorldData();
             string backgroundFile = levelDataService.GetWorldImage();
+            int levelNumber = levelDataService.GetLevelNumber();
 
             foreach(string line in heroLines)
             {
                 String[] heroData = line.Split(", ", 2, StringSplitOptions.RemoveEmptyEntries);
                 Hero hero = new Hero();
-                if (lives > 0)
+                if (lives > 0 && levelNumber <= 3)
                 {
                     hero.SizeTo(32, 32);
                     hero.MoveTo(float.Parse(heroData[0]), float.Parse(heroData[1]));
