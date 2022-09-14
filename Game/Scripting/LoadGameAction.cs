@@ -54,7 +54,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
 
             catch (Exception exception)
             {
-                callback.OnError("Couldn't reset game.", exception);
+                callback.OnError("Couldn't load level.", exception);
             }
 
         }

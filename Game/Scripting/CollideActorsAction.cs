@@ -50,9 +50,6 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                 {
                     if (player.Overlaps(platform))
                     {
-                        // Check if player can jump or not depending on collision
-                        player.DetermineIfCanJump(platform);
-
                         int collisionDirection = player.DetectCollisionDirection(platform);
 
                         // Resolve collision by moving the player to the correct side
@@ -83,7 +80,15 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Scripting
                             float x = player.GetLeft();
                             float y = platform.GetTop() - player.GetHeight();
                             player.MoveTo(x, y); 
-                        }
+                        }  
+
+                        // Check if player can jump or not depending on collision
+                        player.DetermineIfCanJump(collisionDirection);
+
+                    }
+                    else
+                    {
+                        player.canJump = false;
                     }
 
                 }

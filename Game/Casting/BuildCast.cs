@@ -58,7 +58,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
                 Actor flagpole = new Actor();
                 flagpole.SizeTo(16, 304);
                 flagpole.MoveTo(float.Parse(flagpoleData[0]), float.Parse(flagpoleData[1]));
-                flagpole.Tint(Color.Transparent());
+                flagpole.Tint(Color.White());
                 scene.AddActor("flagpole", flagpole);
             }
 
@@ -129,6 +129,7 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
                 }
                 else
                 {
+                    hero.SizeTo(1, 1);
                     hero.MoveTo(32, 240);
                     hero.LockVelocity();
                 }

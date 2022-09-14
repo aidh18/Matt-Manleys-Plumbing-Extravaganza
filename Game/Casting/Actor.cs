@@ -83,13 +83,13 @@ namespace Matt_Manleys_Plumbing_Extravaganza.Game.Casting
             return collisionDirection;
         }
 
-        public void DetermineIfCanJump(Actor other)
+        public void DetermineIfCanJump(int collisionDirection)
         {
-            if (this.GetBottom == other.GetTop)
+            if (collisionDirection == 4)
             {
                 canJump = true;
             }
-            else if (this.GetBottom == other.GetBottom)
+            else if (collisionDirection == 2 || collisionDirection == 3)
             {
                 canJump = true;
             }
